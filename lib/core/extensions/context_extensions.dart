@@ -29,8 +29,8 @@ extension ContextExtensions on BuildContext {
     ScaffoldMessenger.of(this).clearSnackBars();
     ScaffoldMessenger.of(this).showSnackBar(
       SnackBar(
-        content: Text(message),
-        backgroundColor: isError ? Colors.red : Colors.green,
+        content: Text(message, style: TextStyle(color: colors.onError)),
+        backgroundColor: isError ? colors.error : Colors.green,
         showCloseIcon: true,
       ),
     );

@@ -68,7 +68,11 @@ class _SignInFormCardState extends State<SignInFormCard> {
         final cubit = context.read<AuthCubit>();
         final isLoading = state.maybeWhen(loading: () => true, orElse: () => false);
         return SizedBox(
-          width: context.width * .3,
+          width: context.isDesktop
+              ? context.width * .35
+              : context.isTablet
+              ? context.width * .5
+              : context.width * .85,
           child: Stack(
             children: [
               ValueListenableBuilder(

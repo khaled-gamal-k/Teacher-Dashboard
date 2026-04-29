@@ -4,6 +4,8 @@ import 'package:teacher_dashboard/core/constants/app_colors.dart';
 import 'package:teacher_dashboard/core/shared/widgets/app_icon.dart';
 import 'package:teacher_dashboard/core/utils/app_text_style.dart';
 
+import '../../extensions/context_extensions.dart';
+
 class DashboardCard extends StatelessWidget {
   const DashboardCard({
     super.key,
@@ -21,16 +23,19 @@ class DashboardCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 220,
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        maxWidth: context.isDesktop
+            ? context.width * .15
+            : context.isTablet
+            ? context.width * .25
+            : context.width * .42,
+      ),
       child: Card(
         child: ListTile(
           contentPadding: const .symmetric(horizontal: 20, vertical: 20),
-
           trailing: AppIcon(icon: icon, isGlowing: false, color: color, bgColor: bgColor),
-
           title: Text(number, style: AppTextStyles.heading33Bold),
-
           subtitle: Text(
             subtitle,
             style: AppTextStyles.body16Regular.copyWith(color: AppColors.textSecondary),

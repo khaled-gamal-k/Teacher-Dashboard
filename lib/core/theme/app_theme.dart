@@ -81,14 +81,6 @@ abstract class AppTheme {
       titleTextStyle: TextStyle(color: AppColors.textPrimary, fontSize: 18, fontWeight: .bold),
     ),
 
-    // 📋 DataTable
-    dataTableTheme: const DataTableThemeData(
-      headingRowColor: WidgetStatePropertyAll(AppColors.surfaceLight),
-      dataRowColor: WidgetStatePropertyAll(AppColors.surface),
-      headingTextStyle: TextStyle(color: AppColors.textPrimary, fontWeight: .bold),
-      dataTextStyle: TextStyle(color: AppColors.textPrimary),
-    ),
-
     // 🔲 Divider
     dividerColor: AppColors.border,
 

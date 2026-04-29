@@ -58,7 +58,7 @@ class _SidebarItemState extends State<SidebarItem> {
                 color: isActive
                     ? activeColor
                     : isHover
-                    ? AppColors.primaryAccent.withValues(alpha: 0.2)
+                    ? AppColors.surfaceLight
                     : Colors.transparent,
               ),
 

@@ -96,6 +96,21 @@ abstract class AppTextStyles {
     fontWeight: FontWeight.w700,
     color: AppColors.textPrimary,
   );
+  static final body14Bold = GoogleFonts.cairo(
+    fontSize: 14,
+    fontWeight: FontWeight.w700,
+    color: AppColors.textPrimary,
+  );
+  static final body14Regular = GoogleFonts.cairo(
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    color: AppColors.textSecondary,
+  );
+  static final body14SemiBold = GoogleFonts.cairo(
+    fontSize: 14,
+    fontWeight: FontWeight.w600,
+    color: AppColors.textPrimary,
+  );
 
   static final body13Regular = GoogleFonts.cairo(
     fontSize: 13,
