@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../extensions/context_extensions.dart';
-import '../../extensions/widgets_extensions.dart';
-import '../../utils/app_text_style.dart';
+import '../../../core/extensions/context_extensions.dart';
+import '../../../core/extensions/widgets_extensions.dart';
+import '../../../core/utils/app_text_style.dart';
 
 class ErrorsWidget extends StatelessWidget {
   const ErrorsWidget({super.key, required this.message, required this.onPressed});

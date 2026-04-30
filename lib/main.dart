@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,10 +11,12 @@ import 'core/theme/app_theme.dart';
 import 'core/routers/app_router.dart';
 import 'core/services/prefs_service.dart';
 import 'generated/l10n.dart';
+import 'shared/widgets/app_cubit_obs.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: '.env');
+  Bloc.observer = AppCubitObs();
   await ScreenUtil.ensureScreenSize();
   await PrefsService.init();
   await GetItService.init();

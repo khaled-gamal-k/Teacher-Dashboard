@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:teacher_dashboard/core/extensions/widgets_extensions.dart';
 import 'package:teacher_dashboard/core/utils/app_text_style.dart';
 
-import '../../constants/app_colors.dart';
+import '../../core/constants/app_colors.dart';
 
 class AppButton extends StatelessWidget {
   const AppButton({super.key, required this.title, required this.onPressed});

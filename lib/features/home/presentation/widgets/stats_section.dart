@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:teacher_dashboard/core/constants/app_colors.dart';
 
-import '../../../../core/shared/widgets/dashboard_card.dart';
-import '../../../../core/shared/widgets/hover_widgets.dart';
+import '../../../../shared/widgets/dashboard_card.dart';
+import '../../../../shared/widgets/feadback/hover_widgets.dart';
 
 class StatsSection extends StatelessWidget {
   const StatsSection({super.key});

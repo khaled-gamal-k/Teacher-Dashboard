@@ -1,21 +1,21 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:teacher_dashboard/core/constants/app_colors.dart';
-import 'package:teacher_dashboard/core/extensions/widgets_extensions.dart';
+import 'package:teacher_dashboard/core/utils/app_text_style.dart';
 
-import '../../extensions/context_extensions.dart';
-import '../../utils/app_text_style.dart';
+import '../../../core/constants/app_colors.dart';
+import '../../../core/extensions/context_extensions.dart';
+import '../../../core/extensions/widgets_extensions.dart';
 
-class AppLineChart extends StatelessWidget {
-  const AppLineChart({
+class AppBarChart extends StatelessWidget {
+  const AppBarChart({
     super.key,
     required this.title,
-    this.lineColor,
+    this.barColor,
     this.gradientColors,
     this.leftTitlesInterval,
   });
   final String title;
-  final Color? lineColor;
+  final Color? barColor;
   final List<Color>? gradientColors;
   final double? leftTitlesInterval;
 
@@ -36,8 +36,9 @@ class AppLineChart extends StatelessWidget {
             children: [
               Text(title, style: AppTextStyles.heading23Bold),
               Expanded(
-                child: LineChart(
-                  LineChartData(
+                child: BarChart(
+                  BarChartData(
+                    alignment: .spaceEvenly,
                     titlesData: FlTitlesData(
                       topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
                       rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
@@ -45,57 +46,27 @@ class AppLineChart extends StatelessWidget {
                         sideTitles: SideTitles(
                           getTitlesWidget: bottomTitleWidgets,
                           showTitles: true,
-                          interval: 1,
                         ),
                       ),
                       leftTitles: AxisTitles(
-                        sideTitles: SideTitles(showTitles: true, interval: leftTitlesInterval ?? 2),
+                        sideTitles: SideTitles(showTitles: true, interval: leftTitlesInterval),
                       ),
                     ),
+                    gridData: const FlGridData(show: false),
                     borderData: FlBorderData(
+                      show: true,
                       border: const Border(
                         left: BorderSide(color: AppColors.border),
                         bottom: BorderSide(color: AppColors.border),
                       ),
                     ),
-                    gridData: FlGridData(
-                      show: true,
-                      drawVerticalLine: true,
-                      getDrawingHorizontalLine: (value) =>
-                          const FlLine(color: AppColors.border, strokeWidth: .5),
-                      getDrawingVerticalLine: (value) =>
-                          const FlLine(color: AppColors.border, strokeWidth: .5),
-                      verticalInterval: 1,
-                      horizontalInterval: 2,
-                    ),
-                    lineBarsData: [
-                      LineChartBarData(
-                        spots: const [
-                          FlSpot(1, 1),
-                          FlSpot(2, 5),
-                          FlSpot(3, 3),
-                          FlSpot(5, 8),
-                          FlSpot(6, 6),
-                        ],
-                        isCurved: true,
-                        isStrokeCapRound: true,
-                        belowBarData: BarAreaData(
-                          show: gradientColors != null,
-                          gradient: gradientColors != null
-                              ? LinearGradient(
-                                  colors: gradientColors!
-                                      .map((color) => color.withValues(alpha: 0.2))
-                                      .toList(),
-                                )
-                              : null,
-                        ),
-                        gradientArea: .wholeChart,
-                        color: lineColor,
-                        gradient: gradientColors != null
-                            ? LinearGradient(colors: gradientColors!)
-                            : null,
-                        barWidth: 4,
-                      ),
+                    barGroups: [
+                      _bulidCustomBar(1, 2),
+                      _bulidCustomBar(2, 4),
+                      _bulidCustomBar(3, 6),
+                      _bulidCustomBar(4, 8),
+                      _bulidCustomBar(5, 10),
+                      _bulidCustomBar(6, 20),
                     ],
                   ),
                   duration: const Duration(milliseconds: 500),
@@ -106,6 +77,23 @@ class AppLineChart extends StatelessWidget {
           ).paddingSym(h: 20, v: 20),
         ),
       ),
+    );
+  }
+
+  BarChartGroupData _bulidCustomBar(int x, double y) {
+    return BarChartGroupData(
+      x: x,
+      barRods: [
+        BarChartRodData(
+          toY: y,
+          color: barColor,
+          gradient: gradientColors != null
+              ? LinearGradient(colors: gradientColors!, begin: .bottomCenter, end: .topCenter)
+              : null,
+          width: 40,
+          borderRadius: const .only(topLeft: .circular(10), topRight: .circular(10)),
+        ),
+      ],
     );
   }
 

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:teacher_dashboard/core/constants/app_colors.dart';
-import 'package:teacher_dashboard/core/shared/widgets/app_icon.dart';
+import 'package:teacher_dashboard/shared/widgets/app_icon.dart';
 import 'package:teacher_dashboard/core/utils/app_text_style.dart';
 
-import '../../extensions/context_extensions.dart';
+import '../../core/extensions/context_extensions.dart';
 
 class DashboardCard extends StatelessWidget {
   const DashboardCard({

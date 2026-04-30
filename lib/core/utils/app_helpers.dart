@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:teacher_dashboard/core/routers/routers_constants.dart';
 
-import '../shared/models/sidebar_item_model.dart';
+import '../../shared/models/sidebar_item_model.dart';
 
 class AppHelpers {
   static BoxShadow neonGlow(Color color) {
