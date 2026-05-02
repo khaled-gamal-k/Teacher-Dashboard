@@ -1,28 +1,24 @@
 import 'package:flutter/material.dart';
-import '../../../core/extensions/context_extensions.dart';
-import '../../../core/extensions/widgets_extensions.dart';
-import '../../../core/utils/app_text_style.dart';
+import 'package:teacher_dashboard/core/constants/app_colors.dart';
 
-class ErrorsWidget extends StatelessWidget {
-  const ErrorsWidget({super.key, required this.message, required this.onPressed});
+class AppErrorsWidget extends StatelessWidget {
+  const AppErrorsWidget({super.key, required this.message, required this.onRetry});
 
   final String message;
-  final VoidCallback? onPressed;
+  final VoidCallback? onRetry;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.error_outline, size: 48, color: context.colors.error),
-            16.height,
-            Text(message, style: AppTextStyles.heading23Bold, textAlign: TextAlign.center),
-            16.height,
-            ElevatedButton(onPressed: onPressed, child: const Text('أعد المحاولة')),
-          ],
-        ).paddingAll(16.0),
+    return Center(
+      child: Column(
+        key: const ValueKey('error'),
+        spacing: 10,
+        mainAxisSize: .min,
+        children: [
+          const Icon(Icons.error_outline, size: 40, color: AppColors.danger),
+          Text(message, textAlign: TextAlign.center),
+          ElevatedButton(onPressed: onRetry, child: const Text('إعادة المحاولة')),
+        ],
       ),
     );
   }

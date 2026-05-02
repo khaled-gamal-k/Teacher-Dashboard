@@ -1,77 +1,108 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
+
 import 'package:teacher_dashboard/core/constants/app_colors.dart';
+import 'package:teacher_dashboard/core/extensions/strings_extensions.dart';
+import 'package:teacher_dashboard/features/home/presentation/cubit/home_cubit.dart';
+import 'package:teacher_dashboard/features/home/presentation/cubit/home_state.dart';
 
 import '../../../../shared/widgets/dashboard_card.dart';
+import '../../../../shared/widgets/feadback/error_widget.dart';
 import '../../../../shared/widgets/feadback/hover_widgets.dart';
+import '../../data/models/dashboard_model.dart';
+import 'shimmer_loading_widget.dart';
 
 class StatsSection extends StatelessWidget {
   const StatsSection({super.key});
 
   @override
   Widget build(BuildContext context) {
+    return BlocSelector<HomeCubit, HomeState, (DashboardModel?, String?)>(
+      selector: (s) => (s.stats, s.statsError),
+      builder: (context, data) {
+        final stats = data.$1;
+        final error = data.$2;
+
+        if (error.isNotNullOrEmpty && stats == null) {
+          return AppErrorsWidget(
+            message: error!,
+            onRetry: () => context.read<HomeCubit>().loadStats(),
+          );
+        }
+
+        if (stats == null) {
+          return const DashboardCardSkeleton();
+        }
+
+        return _buildContent(stats);
+      },
+    );
+  }
+
+  Widget _buildContent(DashboardModel stats) {
+    final formatter = NumberFormat.compact();
     return Wrap(
       alignment: .start,
       crossAxisAlignment: .start,
       spacing: 15,
       runSpacing: 15,
       children: [
-        HoverScaleOpacity(
-          isGlow: false,
-          scale: 1.1,
-          child: DashboardCard(
-            icon: FontAwesomeIcons.graduationCap,
-            number: '12255',
-            subtitle: 'اجمالي الطلاب',
-            color: AppColors.primaryAccent,
-            bgColor: AppColors.primaryAccent.withValues(alpha: 0.2),
-          ),
+        _buildStatsCard(
+          icon: FontAwesomeIcons.graduationCap,
+          number: formatter.format(stats.studentsCount),
+          subtitle: 'اجمالي الطلاب',
         ),
-        HoverScaleOpacity(
-          isGlow: false,
-          scale: 1.1,
-          child: DashboardCard(
-            icon: FontAwesomeIcons.users,
-            number: '55',
-            subtitle: 'اجمالي المجموعات',
-            color: AppColors.primaryAccent,
-            bgColor: AppColors.primaryAccent.withValues(alpha: 0.2),
-          ),
+        _buildStatsCard(
+          icon: FontAwesomeIcons.users,
+          number: formatter.format(stats.classesCount),
+          subtitle: 'اجمالي المجموعات',
         ),
-        HoverScaleOpacity(
-          isGlow: false,
-          scale: 1.1,
-          child: DashboardCard(
-            icon: FontAwesomeIcons.dollarSign,
-            number: '33,558',
-            subtitle: 'صافي الربح هذا الشهر',
-            color: AppColors.secondaryAccent,
-            bgColor: AppColors.secondaryAccent.withValues(alpha: 0.2),
-          ),
+        _buildStatsCard(
+          icon: FontAwesomeIcons.dollarSign,
+          number: formatter.format(stats.revenue),
+          subtitle: 'صافي الربح هذا الشهر',
+          isSecondary: true,
         ),
-        HoverScaleOpacity(
-          isGlow: false,
-          scale: 1.1,
-          child: DashboardCard(
-            icon: FontAwesomeIcons.check,
-            number: '123',
-            subtitle: 'حضور اليوم',
-            color: AppColors.primaryAccent,
-            bgColor: AppColors.primaryAccent.withValues(alpha: 0.2),
-          ),
+        _buildStatsCard(
+          icon: FontAwesomeIcons.check,
+          number: formatter.format(stats.attendanceToday),
+          subtitle: 'حضور اليوم',
         ),
-        HoverScaleOpacity(
-          isGlow: false,
-          scale: 1.1,
-          child: DashboardCard(
-            icon: FontAwesomeIcons.graduationCap,
-            number: '98%',
-            subtitle: 'متوسط النتائج',
-            color: AppColors.nearExpiry,
-            bgColor: AppColors.nearExpiry.withValues(alpha: 0.2),
-          ),
+        _buildStatsCard(
+          icon: FontAwesomeIcons.graduationCap,
+          number: '${stats.avgScore.toStringAsFixed(1)}%',
+          subtitle: 'متوسط النتائج',
+          isWarning: true,
         ),
       ],
+    );
+  }
+
+  Widget _buildStatsCard({
+    required FaIconData icon,
+    required String number,
+    required String subtitle,
+    bool isSecondary = false,
+    bool isWarning = false,
+  }) {
+    final color = isWarning
+        ? AppColors.nearExpiry
+        : isSecondary
+        ? AppColors.secondaryAccent
+        : AppColors.primaryAccent;
+
+    return HoverScaleOpacity(
+      isGlow: false,
+      scale: 1.05,
+      child: DashboardCard(
+        icon: icon,
+        number: number,
+        subtitle: subtitle,
+        color: color,
+        bgColor: color.withValues(alpha: 0.2),
+      ),
     );
   }
 }

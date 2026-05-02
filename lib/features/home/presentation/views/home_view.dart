@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:teacher_dashboard/core/constants/app_colors.dart';
 import 'package:teacher_dashboard/core/extensions/widgets_extensions.dart';
 
+import '../../../../core/network/supabase_database_config.dart';
 import '../../../../shared/widgets/charts/app_bar_chart.dart';
 import '../../../../shared/widgets/app_data_table.dart';
 import '../widgets/stats_section.dart';
@@ -12,6 +13,7 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SupabaseDatabaseConfig().fetchRPC('dashboard');
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: .center,

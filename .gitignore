@@ -52,7 +52,9 @@ GoogleService-Info.plist
 
 # Logs
 *.log
-
+.txt
+*.sql
+data.json
 # Misc
 *.tmp
 *.bak

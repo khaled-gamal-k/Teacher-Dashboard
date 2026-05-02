@@ -1,12 +1,12 @@
 import 'package:dartz/dartz.dart';
 
-import '../../../../core/network/errors.dart';
-import '../../../../core/services/auth_service.dart';
+import '../../../../core/network/supabase_errors.dart';
+import '../../../../core/network/supabase_auth_config.dart';
 import '../models/signin_input_model.dart';
 import 'auth_repo.dart';
 
 class AuthRepoImpl extends AuthRepo {
-  final AuthService _authService;
+  final SupabaseAuthConfig _authService;
 
   AuthRepoImpl(this._authService);
 

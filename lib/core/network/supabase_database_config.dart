@@ -1,12 +1,11 @@
+import 'package:logger/logger.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import '../services/database_service.dart';
 
-import 'errors.dart';
+import 'supabase_errors.dart';
 
-class SupabaseDatabaseConfig extends DatabaseService {
+class SupabaseDatabaseConfig {
   final _supabase = Supabase.instance.client;
 
-  @override
   Future<void> addData({required String tableName, required Map<String, dynamic> data}) async {
     try {
       await _supabase.from(tableName).insert(data);
@@ -15,19 +14,38 @@ class SupabaseDatabaseConfig extends DatabaseService {
     }
   }
 
-  @override
-  Future<void> deleteData({required String tableName, required String id}) async{
+  Future<void> deleteData({required String tableName, required String id}) async {
+    try {
+      await _supabase.from(tableName).delete().eq('id', id);
+    } catch (e) {
+      throw SupaFailure.fromException(e);
+    }
   }
 
-  @override
-  Future<List<Map<String, dynamic>>> getData({required String tableName}) {
-    // TODO: implement getData
-    throw UnimplementedError();
+  Future<List<Map<String, dynamic>>> getData({required String tableName}) async {
+    try {
+      return await _supabase.from(tableName).select();
+    } catch (e) {
+      throw SupaFailure.fromException(e);
+    }
   }
 
-  @override
-  Future<void> updateData({required String tableName, required Map<String, dynamic> data}) {
-    // TODO: implement updateData
-    throw UnimplementedError();
+  Future<void> updateData({required String tableName, required Map<String, dynamic> data}) async {
+    try {
+      await _supabase.from(tableName).update(data).eq('id', data['id']);
+    } catch (e) {
+      throw SupaFailure.fromException(e);
+    }
+  }
+
+  Future<Map<String, dynamic>> fetchRPC(String tableName) async {
+    try {
+      final res = await _supabase.rpc(tableName);
+      Logger().d(res.runtimeType);
+      Logger().d(res);
+      return res as Map<String, dynamic>;
+    } catch (e) {
+      throw SupaFailure.fromException(e);
+    }
   }
 }

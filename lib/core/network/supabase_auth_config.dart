@@ -1,13 +1,11 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import 'errors.dart';
+import 'supabase_errors.dart';
 
-import '../services/auth_service.dart';
 
-class SupabaseAuthConfig extends AuthService {
+class SupabaseAuthConfig {
   final SupabaseClient _supabase = Supabase.instance.client;
 
-  @override
   Future<void> signIn({required String email, required String password}) async {
     try {
       await _supabase.auth.signInWithPassword(email: email, password: password);
@@ -16,7 +14,6 @@ class SupabaseAuthConfig extends AuthService {
     }
   }
 
-  @override
   Future<void> forgetPassword({required String email, required String password}) async {
     try {
       await _supabase.auth.resetPasswordForEmail(email);
@@ -25,7 +22,6 @@ class SupabaseAuthConfig extends AuthService {
     }
   }
 
-  @override
   Future<void> logOut() async {
     try {
       await _supabase.auth.signOut();
