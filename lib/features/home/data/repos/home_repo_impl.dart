@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:logger/logger.dart';
 
-import 'package:teacher_dashboard/core/network/supabase_errors.dart';
+import '../../../../core/network/supabase_errors.dart';
 
-import 'package:teacher_dashboard/features/home/data/models/dashboard_model.dart';
+import '../models/dashboard_model.dart';
 
-import 'package:teacher_dashboard/shared/models/charts_model.dart';
+import '../../../../shared/models/charts_model.dart';
 
 import '../../../../core/network/supabase_database_config.dart';
 import 'home_repo.dart';
@@ -18,8 +18,8 @@ class HomeRepoImpl implements HomeRepo {
   @override
   Future<Either<Failure, DashboardModel>> fetchDashboardStats() async {
     try {
-      final res = await _databaseService.fetchRPC('get_dashboard_stats');
-      final dashboardModel = DashboardModel.fromJson(res);
+      final res = await _databaseService.fetchRPC('get_dashboard_stats') ;
+      final dashboardModel = DashboardModel.fromJson(res as Map<String, dynamic>);
       Logger().d(dashboardModel);
       return Right(dashboardModel);
     } catch (e) {
@@ -46,8 +46,13 @@ class HomeRepoImpl implements HomeRepo {
   }
 
   @override
-  Future<Either<Failure, List<ChartsModel>>> fetchTotalStudents() {
-    // TODO: implement fetchTotalStudents
-    throw UnimplementedError();
+  Future<Either<Failure, List<ChartsModel>>> fetchTotalStudents() async {
+    try {
+      final res = await _databaseService.fetchRPC('get_students_growth') as List<dynamic>;
+      final list = res.map((e) => ChartsModel.fromJson(e as Map<String, dynamic>)).toList();
+      return Right(list);
+    } catch (e) {
+      return Left(SupaFailure.fromException(e));
+    }
   }
 }

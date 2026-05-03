@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:teacher_dashboard/features/home/data/models/dashboard_model.dart';
-import 'package:teacher_dashboard/shared/models/charts_model.dart';
+import '../models/dashboard_model.dart';
+import '../../../../shared/models/charts_model.dart';
 
 import '../../../../core/network/supabase_errors.dart';
 

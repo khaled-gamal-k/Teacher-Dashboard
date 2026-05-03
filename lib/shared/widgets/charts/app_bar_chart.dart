@@ -1,6 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:teacher_dashboard/core/utils/app_text_style.dart';
+import '../../../core/utils/app_text_style.dart';
 
 import '../../../core/constants/app_colors.dart';
 import '../../../core/extensions/context_extensions.dart';

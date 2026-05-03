@@ -1,15 +1,17 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:teacher_dashboard/core/constants/app_colors.dart';
-import 'package:teacher_dashboard/core/extensions/widgets_extensions.dart';
 
+import '../../../core/constants/app_colors.dart';
 import '../../../core/extensions/context_extensions.dart';
+import '../../../core/extensions/widgets_extensions.dart';
 import '../../../core/utils/app_text_style.dart';
+import '../../models/charts_model.dart';
 
 class AppLineChart extends StatelessWidget {
   const AppLineChart({
     super.key,
     required this.title,
+    this.data,
     this.lineColor,
     this.gradientColors,
     this.leftTitlesInterval,
@@ -18,6 +20,7 @@ class AppLineChart extends StatelessWidget {
   final Color? lineColor;
   final List<Color>? gradientColors;
   final double? leftTitlesInterval;
+  final List<ChartsModel>? data;
 
   @override
   Widget build(BuildContext context) {
@@ -45,11 +48,11 @@ class AppLineChart extends StatelessWidget {
                         sideTitles: SideTitles(
                           getTitlesWidget: bottomTitleWidgets,
                           showTitles: true,
-                          interval: 1,
+                          interval: 1
                         ),
                       ),
                       leftTitles: AxisTitles(
-                        sideTitles: SideTitles(showTitles: true, interval: leftTitlesInterval ?? 2),
+                        sideTitles: SideTitles(showTitles: true, interval: leftTitlesInterval),
                       ),
                     ),
                     borderData: FlBorderData(
@@ -70,13 +73,7 @@ class AppLineChart extends StatelessWidget {
                     ),
                     lineBarsData: [
                       LineChartBarData(
-                        spots: const [
-                          FlSpot(1, 1),
-                          FlSpot(2, 5),
-                          FlSpot(3, 3),
-                          FlSpot(5, 8),
-                          FlSpot(6, 6),
-                        ],
+                        spots: data!.map((e) => FlSpot(e.x, e.y)).toList(),
                         isCurved: true,
                         isStrokeCapRound: true,
                         belowBarData: BarAreaData(

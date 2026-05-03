@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:teacher_dashboard/core/extensions/context_extensions.dart';
-import 'package:teacher_dashboard/layout/sidebar/app_sidebar.dart';
 
+import '../core/extensions/context_extensions.dart';
 import 'responsive/desktop_layout.dart';
 import 'responsive/mobile_layout.dart';
 import 'responsive/tablet_layout.dart';
+import 'sidebar/app_sidebar.dart';
 
 class AppLayouts extends StatelessWidget {
   const AppLayouts({super.key, required this.child});

@@ -31,6 +31,7 @@ extension ContextExtensions on BuildContext {
       SnackBar(
         content: Text(message, style: const TextStyle(color: Colors.white, fontSize: 16)),
         backgroundColor: isError ? Colors.red : Colors.green,
+        showCloseIcon: true,
         behavior: .floating,
       ),
     );

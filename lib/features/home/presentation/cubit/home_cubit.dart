@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:teacher_dashboard/features/home/data/repos/home_repo.dart';
-import 'package:teacher_dashboard/features/home/presentation/cubit/home_state.dart';
+
+import '../../data/repos/home_repo.dart';
+import 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   final HomeRepo _repo;
@@ -10,8 +11,8 @@ class HomeCubit extends Cubit<HomeState> {
   void init() {
     loadStats();
     loadStudents();
-    loadAttendance();
-    loadPerformance();
+    // loadAttendance();
+    // loadPerformance();
   }
 
   Future<void> loadStats() async {

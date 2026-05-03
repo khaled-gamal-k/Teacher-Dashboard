@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:teacher_dashboard/core/utils/app_text_style.dart';
+import '../../core/utils/app_text_style.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/utils/app_helpers.dart';
 

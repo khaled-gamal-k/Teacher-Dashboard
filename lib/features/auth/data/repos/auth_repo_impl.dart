@@ -5,7 +5,7 @@ import '../../../../core/network/supabase_auth_config.dart';
 import '../models/signin_input_model.dart';
 import 'auth_repo.dart';
 
-class AuthRepoImpl extends AuthRepo {
+class AuthRepoImpl implements AuthRepo {
   final SupabaseAuthConfig _authService;
 
   AuthRepoImpl(this._authService);

@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 
-import 'package:teacher_dashboard/core/constants/app_colors.dart';
-import 'package:teacher_dashboard/core/extensions/strings_extensions.dart';
-import 'package:teacher_dashboard/features/home/presentation/cubit/home_cubit.dart';
-import 'package:teacher_dashboard/features/home/presentation/cubit/home_state.dart';
+import '../../../../core/constants/app_colors.dart';
+import '../../../../core/extensions/strings_extensions.dart';
+import '../cubit/home_cubit.dart';
+import '../cubit/home_state.dart';
 
 import '../../../../shared/widgets/dashboard_card.dart';
 import '../../../../shared/widgets/feadback/error_widget.dart';
@@ -71,7 +71,7 @@ class StatsSection extends StatelessWidget {
           subtitle: 'حضور اليوم',
         ),
         _buildStatsCard(
-          icon: FontAwesomeIcons.graduationCap,
+          icon: FontAwesomeIcons.percent,
           number: '${stats.avgScore.toStringAsFixed(1)}%',
           subtitle: 'متوسط النتائج',
           isWarning: true,

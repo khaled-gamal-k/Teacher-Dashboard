@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:teacher_dashboard/core/extensions/context_extensions.dart';
-import 'package:teacher_dashboard/shared/widgets/feadback/hover_widgets.dart';
-import 'package:teacher_dashboard/shared/widgets/feadback/loading_widget.dart';
-import 'package:teacher_dashboard/features/auth/presentation/cubit/auth_state.dart';
+import '../../../../core/extensions/context_extensions.dart';
+import '../../../../shared/widgets/feadback/hover_widgets.dart';
+import '../../../../shared/widgets/feadback/loading_widget.dart';
+import '../cubit/auth_state.dart';
 
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/extensions/strings_extensions.dart';

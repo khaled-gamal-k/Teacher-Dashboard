@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:teacher_dashboard/core/constants/app_colors.dart';
+import '../../../core/constants/app_colors.dart';
 
 class AppErrorsWidget extends StatelessWidget {
   const AppErrorsWidget({super.key, required this.message, required this.onRetry});

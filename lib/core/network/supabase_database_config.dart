@@ -38,12 +38,12 @@ class SupabaseDatabaseConfig {
     }
   }
 
-  Future<Map<String, dynamic>> fetchRPC(String tableName) async {
+  Future fetchRPC(String tableName) async {
     try {
       final res = await _supabase.rpc(tableName);
       Logger().d(res.runtimeType);
       Logger().d(res);
-      return res as Map<String, dynamic>;
+      return res ;
     } catch (e) {
       throw SupaFailure.fromException(e);
     }

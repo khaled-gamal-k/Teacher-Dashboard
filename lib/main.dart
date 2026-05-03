@@ -4,12 +4,12 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'core/extensions/context_extensions.dart';
-import 'core/services/get_it_service.dart';
-import 'core/theme/app_theme.dart';
 
+import 'core/extensions/context_extensions.dart';
 import 'core/routers/app_router.dart';
+import 'core/services/get_it_service.dart';
 import 'core/services/prefs_service.dart';
+import 'core/theme/app_theme.dart';
 import 'generated/l10n.dart';
 import 'shared/widgets/app_cubit_obs.dart';
 

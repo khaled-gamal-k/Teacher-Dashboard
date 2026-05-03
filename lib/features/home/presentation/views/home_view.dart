@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:teacher_dashboard/core/constants/app_colors.dart';
-import 'package:teacher_dashboard/core/extensions/widgets_extensions.dart';
+import '../../../../core/constants/app_colors.dart';
+import '../../../../core/extensions/widgets_extensions.dart';
 
 import '../../../../core/network/supabase_database_config.dart';
 import '../../../../shared/widgets/charts/app_bar_chart.dart';
 import '../../../../shared/widgets/app_data_table.dart';
+import '../widgets/attendance_per_month_chatrs.dart';
 import '../widgets/stats_section.dart';
-import '../../../../shared/widgets/charts/app_line_chart.dart';
+import '../widgets/students_growth_chatrs.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -25,12 +26,8 @@ class HomeView extends StatelessWidget {
             runSpacing: 20,
             alignment: .center,
             children: [
-              AppLineChart(
-                title: 'اتجاه الحضور',
-                leftTitlesInterval: 1,
-                gradientColors: [AppColors.expired, AppColors.nearExpiry],
-              ),
-              AppLineChart(title: 'اجمالي الطلاب', lineColor: AppColors.success),
+              StudentsGrowthChatrs(),
+              AttendancePerMonthChatrs(),
               AppDataTable(),
               AppBarChart(
                 title: 'أداء المجموعات',

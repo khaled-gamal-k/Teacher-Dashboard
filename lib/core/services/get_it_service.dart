@@ -1,5 +1,5 @@
 import 'package:get_it/get_it.dart';
-import 'package:teacher_dashboard/features/home/data/repos/home_repo.dart';
+import '../../features/home/data/repos/home_repo.dart';
 import '../../features/auth/data/repos/auth_repo.dart';
 import '../../features/auth/data/repos/auth_repo_impl.dart';
 import '../../features/auth/presentation/cubit/auth_cubit.dart';

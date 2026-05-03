@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:teacher_dashboard/core/constants/app_colors.dart';
-import 'package:teacher_dashboard/core/extensions/context_extensions.dart';
-import 'package:teacher_dashboard/core/extensions/widgets_extensions.dart';
-import 'package:teacher_dashboard/core/utils/app_helpers.dart';
+import '../../core/constants/app_colors.dart';
+import '../../core/extensions/context_extensions.dart';
+import '../../core/extensions/widgets_extensions.dart';
+import '../../core/utils/app_helpers.dart';
 
 import '../../shared/widgets/app_icon.dart';
 import '../../core/utils/app_text_style.dart';

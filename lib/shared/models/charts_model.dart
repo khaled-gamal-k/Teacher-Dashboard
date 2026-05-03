@@ -4,7 +4,7 @@ part 'charts_model.g.dart';
 
 @JsonSerializable(createToJson: false)
 class ChartsModel {
-  final String x;
+  final double x;
   final double y;
 
   ChartsModel({required this.x, required this.y});

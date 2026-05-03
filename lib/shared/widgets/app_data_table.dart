@@ -1,11 +1,11 @@
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:teacher_dashboard/core/constants/app_colors.dart';
-import 'package:teacher_dashboard/core/routers/routers_constants.dart';
 
+import '../../core/constants/app_colors.dart';
 import '../../core/extensions/context_extensions.dart';
 import '../../core/extensions/widgets_extensions.dart';
+import '../../core/routers/routers_constants.dart';
 import '../../core/utils/app_text_style.dart';
 
 class AppDataTable extends StatelessWidget {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+
 import '../../../core/constants/app_colors.dart';
 import '../../../core/utils/app_helpers.dart';
 

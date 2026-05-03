@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:teacher_dashboard/shared/models/charts_model.dart';
+import '../../../../shared/models/charts_model.dart';
 
 import '../../data/models/dashboard_model.dart';
 
