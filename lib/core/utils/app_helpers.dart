@@ -51,7 +51,7 @@ class AppHelpers {
   // }
 
   static final sideBarItems = [
-    Item(FontAwesomeIcons.chartPie, 'لوحة التحكم', Routers.home),
+    Item(FontAwesomeIcons.chartPie, 'الرئيسية', Routers.home),
     Item(FontAwesomeIcons.graduationCap, 'الطلاب', Routers.students),
     Item(FontAwesomeIcons.users, 'المجموعات', Routers.groups),
     Item(FontAwesomeIcons.clipboardCheck, 'الحضور', Routers.attendance),

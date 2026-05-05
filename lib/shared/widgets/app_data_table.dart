@@ -56,7 +56,7 @@ class AppDataTable extends StatelessWidget {
                 ),
                 showCheckboxColumn: false,
                 border: const TableBorder(horizontalInside: BorderSide(color: AppColors.border)),
-                columns: tableModel?.headers.map((e) => DataColumn2(label: Text(e))).toList() ?? [],
+                columns: tableModel?.headers.map((e) => DataColumn2(label: Text(e),size: .L)).toList() ?? [],
                 rows:
                     tableModel?.rows.asMap().entries.map((entry) {
                       final index = entry.key;

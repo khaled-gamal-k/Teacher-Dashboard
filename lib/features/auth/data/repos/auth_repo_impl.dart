@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 
-import '../../../../core/network/supabase_errors.dart';
 import '../../../../core/network/supabase_auth_config.dart';
+import '../../../../core/network/supabase_errors.dart';
 import '../models/signin_input_model.dart';
 import 'auth_repo.dart';
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../core/extensions/widgets_extensions.dart';
-import '../../core/utils/app_text_style.dart';
 
 import '../../core/constants/app_colors.dart';
+import '../../core/extensions/widgets_extensions.dart';
+import '../../core/utils/app_text_style.dart';
 
 class AppButton extends StatelessWidget {
   const AppButton({super.key, required this.title, required this.onPressed});

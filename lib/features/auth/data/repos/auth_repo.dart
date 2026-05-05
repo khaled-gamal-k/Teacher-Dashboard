@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import '../../../../core/network/supabase_errors.dart';
 
+import '../../../../core/network/supabase_errors.dart';
 import '../models/signin_input_model.dart';
 
 abstract class AuthRepo {

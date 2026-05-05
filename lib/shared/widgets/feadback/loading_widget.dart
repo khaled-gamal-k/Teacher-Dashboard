@@ -2,9 +2,10 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import '../../../core/utils/app_text_style.dart';
+
 import '../../../core/constants/app_colors.dart';
 import '../../../core/extensions/widgets_extensions.dart';
+import '../../../core/utils/app_text_style.dart';
 
 class AppLoading extends StatelessWidget {
   const AppLoading({super.key, this.size = 60, this.showText = true});

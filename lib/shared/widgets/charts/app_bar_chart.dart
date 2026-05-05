@@ -1,6 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:teacher_dashboard/features/home/data/models/class_performance_model.dart';
+import '../../../features/home/data/models/class_performance_model.dart';
 import '../../../core/utils/app_text_style.dart';
 
 import '../../../core/constants/app_colors.dart';

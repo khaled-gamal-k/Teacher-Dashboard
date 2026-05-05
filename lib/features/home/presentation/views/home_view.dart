@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../core/extensions/widgets_extensions.dart';
 
+import '../../../../core/extensions/widgets_extensions.dart';
 import '../../../../core/network/supabase_database_config.dart';
 import '../widgets/attendance_per_month_chatrs.dart';
 import '../widgets/class_performance_charts.dart';
