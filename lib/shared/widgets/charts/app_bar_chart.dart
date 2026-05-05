@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:teacher_dashboard/features/home/data/models/class_performance_model.dart';
 import '../../../core/utils/app_text_style.dart';
 
 import '../../../core/constants/app_colors.dart';
@@ -13,11 +14,13 @@ class AppBarChart extends StatelessWidget {
     this.barColor,
     this.gradientColors,
     this.leftTitlesInterval,
+    this.classesPerformance,
   });
   final String title;
   final Color? barColor;
   final List<Color>? gradientColors;
   final double? leftTitlesInterval;
+  final List<ClassPerformanceModel>? classesPerformance;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +47,19 @@ class AppBarChart extends StatelessWidget {
                       rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
                       bottomTitles: AxisTitles(
                         sideTitles: SideTitles(
-                          getTitlesWidget: bottomTitleWidgets,
+                          getTitlesWidget: (value, meta) {
+                            final style = AppTextStyles.body13Bold;
+                            if (value.toInt() >= classesPerformance!.length) {
+                              return const SizedBox();
+                            }
+                            final lable =
+                                classesPerformance?[value.toInt()].className ??
+                                'لم يتم التعرف على الصف';
+                            return SideTitleWidget(
+                              meta: meta,
+                              child: Text(lable, style: style),
+                            );
+                          },
                           showTitles: true,
                         ),
                       ),
@@ -60,14 +75,19 @@ class AppBarChart extends StatelessWidget {
                         bottom: BorderSide(color: AppColors.border),
                       ),
                     ),
-                    barGroups: [
-                      _bulidCustomBar(1, 2),
-                      _bulidCustomBar(2, 4),
-                      _bulidCustomBar(3, 6),
-                      _bulidCustomBar(4, 8),
-                      _bulidCustomBar(5, 10),
-                      _bulidCustomBar(6, 20),
-                    ],
+                    barGroups: _buildBarGroups(),
+                    barTouchData: BarTouchData(
+                      touchTooltipData: BarTouchTooltipData(
+                        getTooltipItem: (group, groupIndex, rod, rodIndex) {
+                          final point = classesPerformance![groupIndex].points[rodIndex];
+
+                          return BarTooltipItem(
+                            'الساعه ${point.x}:00\n${point.y}%',
+                            const TextStyle(color: Colors.white),
+                          );
+                        },
+                      ),
+                    ),
                   ),
                   duration: const Duration(milliseconds: 500),
                   curve: Curves.easeInExpo,
@@ -80,45 +100,47 @@ class AppBarChart extends StatelessWidget {
     );
   }
 
-  BarChartGroupData _bulidCustomBar(int x, double y) {
-    return BarChartGroupData(
-      x: x,
-      barRods: [
-        BarChartRodData(
-          toY: y,
-          color: barColor,
-          gradient: gradientColors != null
-              ? LinearGradient(colors: gradientColors!, begin: .bottomCenter, end: .topCenter)
-              : null,
-          width: 40,
-          borderRadius: const .only(topLeft: .circular(10), topRight: .circular(10)),
-        ),
-      ],
-    );
+  List<BarChartGroupData> _buildBarGroups() {
+    if (classesPerformance == null) return [];
+
+    return List.generate(classesPerformance!.length, (index) {
+      final classItem = classesPerformance![index];
+
+      return BarChartGroupData(
+        x: index,
+        barsSpace: 5,
+        barRods: classItem.points.map((point) {
+          return BarChartRodData(
+            toY: point.y,
+            width: 10,
+            color: barColor,
+            gradient: gradientColors != null
+                ? LinearGradient(
+                    colors: _buildGradientColors(point.x.toInt()),
+                    begin: .bottomCenter,
+                    end: .topCenter,
+                  )
+                : null,
+            borderRadius: const .only(topLeft: .circular(6), topRight: .circular(6)),
+          );
+        }).toList(),
+      );
+    });
   }
 
-  Widget bottomTitleWidgets(double value, TitleMeta meta) {
-    final style = AppTextStyles.body13Bold;
+  List<Color> _buildGradientColors(int index) {
+    switch (index % 5) {
+      case 0:
+        return [const Color(0xFFFF9A44), const Color(0xFFFFD452)];
 
-    const months = [
-      '',
-      'يناير',
-      'فبراير',
-      'مارس',
-      'أبريل',
-      'مايو',
-      'يونيو',
-      'يوليو',
-      'أغسطس',
-      'سبتمبر',
-      'أكتوبر',
-      'نوفمبر',
-      'ديسمبر',
-    ];
+      case 2:
+        return [const Color(0xFF43E97B), const Color(0xFF38F9D7)];
 
-    return SideTitleWidget(
-      meta: meta,
-      child: Text(months[value.toInt()], style: style),
-    );
+      case 3:
+        return [const Color(0xFF7F00FF), const Color(0xFFE100FF)];
+
+      default:
+        return [AppColors.primaryAccent, AppColors.secondaryAccent];
+    }
   }
 }

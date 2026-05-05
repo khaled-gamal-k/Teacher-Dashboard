@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import '../../../../core/constants/app_colors.dart';
 import '../../../../core/extensions/widgets_extensions.dart';
 
 import '../../../../core/network/supabase_database_config.dart';
-import '../../../../shared/widgets/charts/app_bar_chart.dart';
-import '../../../../shared/widgets/app_data_table.dart';
 import '../widgets/attendance_per_month_chatrs.dart';
+import '../widgets/class_performance_charts.dart';
+import '../widgets/last_exams_table.dart';
 import '../widgets/stats_section.dart';
 import '../widgets/students_growth_chatrs.dart';
 
@@ -28,11 +27,8 @@ class HomeView extends StatelessWidget {
             children: [
               StudentsGrowthChatrs(),
               AttendancePerMonthChatrs(),
-              AppDataTable(),
-              AppBarChart(
-                title: 'أداء المجموعات',
-                gradientColors: [AppColors.primaryAccent, AppColors.secondaryAccent],
-              ),
+              LastExamsTable(),
+              ClassPerformanceCharts(),
             ],
           ),
         ],

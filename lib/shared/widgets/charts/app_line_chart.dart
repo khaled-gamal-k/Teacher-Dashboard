@@ -15,8 +15,10 @@ class AppLineChart extends StatelessWidget {
     this.lineColor,
     this.gradientColors,
     this.leftTitlesInterval,
+    required this.bottomTitleWidget,
   });
   final String title;
+  final Widget Function(double value, TitleMeta meta) bottomTitleWidget;
   final Color? lineColor;
   final List<Color>? gradientColors;
   final double? leftTitlesInterval;
@@ -46,9 +48,9 @@ class AppLineChart extends StatelessWidget {
                       rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
                       bottomTitles: AxisTitles(
                         sideTitles: SideTitles(
-                          getTitlesWidget: bottomTitleWidgets,
+                          getTitlesWidget: bottomTitleWidget,
                           showTitles: true,
-                          interval: 1
+                          interval: 1,
                         ),
                       ),
                       leftTitles: AxisTitles(
@@ -87,6 +89,7 @@ class AppLineChart extends StatelessWidget {
                               : null,
                         ),
                         gradientArea: .wholeChart,
+                        preventCurveOverShooting: true,
                         color: lineColor,
                         gradient: gradientColors != null
                             ? LinearGradient(colors: gradientColors!)
@@ -103,31 +106,6 @@ class AppLineChart extends StatelessWidget {
           ).paddingSym(h: 20, v: 20),
         ),
       ),
-    );
-  }
-
-  Widget bottomTitleWidgets(double value, TitleMeta meta) {
-    final style = AppTextStyles.body13Bold;
-
-    const months = [
-      '',
-      'يناير',
-      'فبراير',
-      'مارس',
-      'أبريل',
-      'مايو',
-      'يونيو',
-      'يوليو',
-      'أغسطس',
-      'سبتمبر',
-      'أكتوبر',
-      'نوفمبر',
-      'ديسمبر',
-    ];
-
-    return SideTitleWidget(
-      meta: meta,
-      child: Text(months[value.toInt()], style: style),
     );
   }
 }

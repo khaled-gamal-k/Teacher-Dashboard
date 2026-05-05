@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/extensions/strings_extensions.dart';
+import '../../../../core/utils/app_helpers.dart';
 import '../../../../shared/models/charts_model.dart';
 import '../../../../shared/widgets/charts/app_line_chart.dart';
 import '../../../../shared/widgets/charts/charts_error_widget.dart';
@@ -34,6 +35,7 @@ class StudentsGrowthChatrs extends StatelessWidget {
           key: const ValueKey('content'),
           title: 'اجمالي الطلاب',
           lineColor: AppColors.success,
+          bottomTitleWidget: AppHelpers.bottomMonthWidget,
           data: data,
         );
       },

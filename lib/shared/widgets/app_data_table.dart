@@ -1,15 +1,17 @@
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../core/constants/app_colors.dart';
 import '../../core/extensions/context_extensions.dart';
 import '../../core/extensions/widgets_extensions.dart';
-import '../../core/routers/routers_constants.dart';
 import '../../core/utils/app_text_style.dart';
+import '../models/table_model.dart';
 
 class AppDataTable extends StatelessWidget {
-  const AppDataTable({super.key});
+  const AppDataTable({super.key, this.tableModel, required this.title, this.onTap});
+  final TableModel? tableModel;
+  final String title;
+  final VoidCallback? onTap;
 
   double _getWidth(BuildContext context) {
     if (context.isDesktop) return context.width * .39;
@@ -32,12 +34,13 @@ class AppDataTable extends StatelessWidget {
             Row(
               mainAxisAlignment: .spaceBetween,
               children: [
-                Text('الأمتحانات الأخيرة', style: AppTextStyles.heading23Bold),
+                Text(title, style: AppTextStyles.heading23Bold),
                 TextButton(
-                  onPressed: () {
-                    context.go(Routers.students);
-                  },
-                  child: const Text('عرض الكل'),
+                  onPressed: onTap,
+                  child: Text(
+                    'عرض الكل',
+                    style: AppTextStyles.body14Regular.copyWith(color: AppColors.primaryAccent),
+                  ),
                 ),
               ],
             ),
@@ -53,52 +56,61 @@ class AppDataTable extends StatelessWidget {
                 ),
                 showCheckboxColumn: false,
                 border: const TableBorder(horizontalInside: BorderSide(color: AppColors.border)),
-                columns: const [
-                  DataColumn(label: Text('اسم الامتحان')),
-                  DataColumn2(label: Text('المجموعة'), size: .L),
-                  DataColumn(label: Text('التاريخ')),
-                  DataColumn2(label: Text('المتوسط'), numeric: true, size: .S),
-                ],
+                columns: tableModel?.headers.map((e) => DataColumn2(label: Text(e))).toList() ?? [],
+                rows:
+                    tableModel?.rows.asMap().entries.map((entry) {
+                      final index = entry.key;
+                      final row = entry.value;
 
-                rows: List.generate(5, (index) {
-                  final isGood = index % 2 == 0;
+                      return DataRow(
+                        color: .resolveWith<Color?>((states) {
+                          if (states.contains(WidgetState.hovered)) {
+                            return AppColors.surfaceLight.withValues(alpha: 0.4);
+                          }
+                          if (states.contains(WidgetState.pressed)) {
+                            return AppColors.surfaceLight;
+                          }
+                          return null;
+                        }),
+                        onSelectChanged: (_) {
+                          tableModel?.onRowTap?.call(index);
+                        },
+                        cells: List.generate(row.length, (cellIndex) {
+                          final cell = row[cellIndex];
 
-                  return DataRow(
-                    color: .resolveWith<Color?>((states) {
-                      if (states.contains(WidgetState.hovered)) {
-                        return AppColors.surfaceLight.withValues(alpha: 0.4);
-                      }
-                      if (states.contains(WidgetState.pressed)) {
-                        return AppColors.surfaceLight;
-                      }
-
-                      return null;
-                    }),
-                    onSelectChanged: (_) {
-                      // ? navigate to details
-                      // context.push(...)
-                    },
-
-                    cells: [
-                      DataCell(Text("الباب الأول", style: AppTextStyles.body14Bold)),
-                      const DataCell(Text("الاثنين والخميس 2")),
-                      const DataCell(Text("2026-01-01")),
-                      DataCell(
-                        Text(
-                          isGood ? "88%" : "72%",
-                          style: AppTextStyles.body14Bold.copyWith(
-                            color: isGood ? AppColors.success : AppColors.warning,
-                          ),
-                        ),
-                      ),
-                    ],
-                  );
-                }),
+                          return DataCell(Text(cell, style: _getCellStyle(cellIndex, cell)));
+                        }),
+                      );
+                    }).toList() ??
+                    [],
               ),
             ),
           ],
         ).paddingSym(h: 20, v: 20),
       ),
     );
+  }
+
+  TextStyle _getCellStyle(int index, String value) {
+    if (index == 3) {
+      final score = double.tryParse(value) ?? 0;
+
+      Color color;
+      if (score >= 85) {
+        color = AppColors.success;
+      } else if (score >= 60) {
+        color = AppColors.warning;
+      } else {
+        color = AppColors.danger;
+      }
+
+      return AppTextStyles.body14Bold.copyWith(color: color);
+    }
+
+    if (index == 0) {
+      return AppTextStyles.body14Bold;
+    }
+
+    return AppTextStyles.body14Regular;
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/utils/app_helpers.dart';
 import '../../../../shared/widgets/charts/charts_error_widget.dart';
 
 import '../../../../core/constants/app_colors.dart';
@@ -16,7 +17,7 @@ class AttendancePerMonthChatrs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocSelector<HomeCubit, HomeState, (List<ChartsModel>?, String?)>(
-      selector: (state) => (state.students, state.studentsError),
+      selector: (state) => (state.attendance, state.attendanceError),
       builder: (context, d) {
         final data = d.$1;
         final error = d.$2;
@@ -24,7 +25,7 @@ class AttendancePerMonthChatrs extends StatelessWidget {
         if (error.isNotNullOrEmpty && data == null) {
           return ChartsErrorWidget(
             message: error!,
-            onRetry: () => context.read<HomeCubit>().loadStudents(),
+            onRetry: () => context.read<HomeCubit>().loadAttendance(),
           );
         }
         if (data == null) {
@@ -34,6 +35,7 @@ class AttendancePerMonthChatrs extends StatelessWidget {
           key: const ValueKey('content'),
           title: 'اتجاه الحضور',
           gradientColors: const [AppColors.warning, AppColors.expired],
+          bottomTitleWidget: AppHelpers.bottomMonthWidget,
           data: data,
         );
       },

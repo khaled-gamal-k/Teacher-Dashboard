@@ -11,8 +11,9 @@ class HomeCubit extends Cubit<HomeState> {
   void init() {
     loadStats();
     loadStudents();
-    // loadAttendance();
-    // loadPerformance();
+    loadAttendance();
+    loadPerformance();
+    loadLastExams();
   }
 
   Future<void> loadStats() async {
@@ -48,6 +49,15 @@ class HomeCubit extends Cubit<HomeState> {
     result.fold(
       (failure) => emit(state.copyWith(performanceError: failure.message)),
       (data) => emit(state.copyWith(performance: data)),
+    );
+  }
+
+  Future<void> loadLastExams() async {
+    final result = await _repo.fetchLastExams();
+
+    result.fold(
+      (failure) => emit(state.copyWith(examsError: failure.message)),
+      (data) => emit(state.copyWith(exams: data)),
     );
   }
 }

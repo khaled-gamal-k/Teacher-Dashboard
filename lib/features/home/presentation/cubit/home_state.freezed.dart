@@ -14,9 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$HomeState {
 
- DashboardModel? get stats; String? get statsError; List<ChartsModel>? get students; String? get studentsError; List<ChartsModel>? get attendance; String? get attendanceError; List<ChartsModel>? get performance; String? get performanceError;// List<ExamModel>? exams,
-// String? examsError,
- bool get isLoading;
+ DashboardModel? get stats; String? get statsError; List<ChartsModel>? get students; String? get studentsError; List<ChartsModel>? get attendance; String? get attendanceError; List<ClassPerformanceModel>? get performance; String? get performanceError; List<LastExamsModel>? get exams; String? get examsError;
 /// Create a copy of HomeState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -27,16 +25,16 @@ $HomeStateCopyWith<HomeState> get copyWith => _$HomeStateCopyWithImpl<HomeState>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeState&&(identical(other.stats, stats) || other.stats == stats)&&(identical(other.statsError, statsError) || other.statsError == statsError)&&const DeepCollectionEquality().equals(other.students, students)&&(identical(other.studentsError, studentsError) || other.studentsError == studentsError)&&const DeepCollectionEquality().equals(other.attendance, attendance)&&(identical(other.attendanceError, attendanceError) || other.attendanceError == attendanceError)&&const DeepCollectionEquality().equals(other.performance, performance)&&(identical(other.performanceError, performanceError) || other.performanceError == performanceError)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeState&&(identical(other.stats, stats) || other.stats == stats)&&(identical(other.statsError, statsError) || other.statsError == statsError)&&const DeepCollectionEquality().equals(other.students, students)&&(identical(other.studentsError, studentsError) || other.studentsError == studentsError)&&const DeepCollectionEquality().equals(other.attendance, attendance)&&(identical(other.attendanceError, attendanceError) || other.attendanceError == attendanceError)&&const DeepCollectionEquality().equals(other.performance, performance)&&(identical(other.performanceError, performanceError) || other.performanceError == performanceError)&&const DeepCollectionEquality().equals(other.exams, exams)&&(identical(other.examsError, examsError) || other.examsError == examsError));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,stats,statsError,const DeepCollectionEquality().hash(students),studentsError,const DeepCollectionEquality().hash(attendance),attendanceError,const DeepCollectionEquality().hash(performance),performanceError,isLoading);
+int get hashCode => Object.hash(runtimeType,stats,statsError,const DeepCollectionEquality().hash(students),studentsError,const DeepCollectionEquality().hash(attendance),attendanceError,const DeepCollectionEquality().hash(performance),performanceError,const DeepCollectionEquality().hash(exams),examsError);
 
 @override
 String toString() {
-  return 'HomeState(stats: $stats, statsError: $statsError, students: $students, studentsError: $studentsError, attendance: $attendance, attendanceError: $attendanceError, performance: $performance, performanceError: $performanceError, isLoading: $isLoading)';
+  return 'HomeState(stats: $stats, statsError: $statsError, students: $students, studentsError: $studentsError, attendance: $attendance, attendanceError: $attendanceError, performance: $performance, performanceError: $performanceError, exams: $exams, examsError: $examsError)';
 }
 
 
@@ -47,7 +45,7 @@ abstract mixin class $HomeStateCopyWith<$Res>  {
   factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) _then) = _$HomeStateCopyWithImpl;
 @useResult
 $Res call({
- DashboardModel? stats, String? statsError, List<ChartsModel>? students, String? studentsError, List<ChartsModel>? attendance, String? attendanceError, List<ChartsModel>? performance, String? performanceError, bool isLoading
+ DashboardModel? stats, String? statsError, List<ChartsModel>? students, String? studentsError, List<ChartsModel>? attendance, String? attendanceError, List<ClassPerformanceModel>? performance, String? performanceError, List<LastExamsModel>? exams, String? examsError
 });
 
 
@@ -64,7 +62,7 @@ class _$HomeStateCopyWithImpl<$Res>
 
 /// Create a copy of HomeState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? stats = freezed,Object? statsError = freezed,Object? students = freezed,Object? studentsError = freezed,Object? attendance = freezed,Object? attendanceError = freezed,Object? performance = freezed,Object? performanceError = freezed,Object? isLoading = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? stats = freezed,Object? statsError = freezed,Object? students = freezed,Object? studentsError = freezed,Object? attendance = freezed,Object? attendanceError = freezed,Object? performance = freezed,Object? performanceError = freezed,Object? exams = freezed,Object? examsError = freezed,}) {
   return _then(_self.copyWith(
 stats: freezed == stats ? _self.stats : stats // ignore: cast_nullable_to_non_nullable
 as DashboardModel?,statsError: freezed == statsError ? _self.statsError : statsError // ignore: cast_nullable_to_non_nullable
@@ -73,9 +71,10 @@ as List<ChartsModel>?,studentsError: freezed == studentsError ? _self.studentsEr
 as String?,attendance: freezed == attendance ? _self.attendance : attendance // ignore: cast_nullable_to_non_nullable
 as List<ChartsModel>?,attendanceError: freezed == attendanceError ? _self.attendanceError : attendanceError // ignore: cast_nullable_to_non_nullable
 as String?,performance: freezed == performance ? _self.performance : performance // ignore: cast_nullable_to_non_nullable
-as List<ChartsModel>?,performanceError: freezed == performanceError ? _self.performanceError : performanceError // ignore: cast_nullable_to_non_nullable
-as String?,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
-as bool,
+as List<ClassPerformanceModel>?,performanceError: freezed == performanceError ? _self.performanceError : performanceError // ignore: cast_nullable_to_non_nullable
+as String?,exams: freezed == exams ? _self.exams : exams // ignore: cast_nullable_to_non_nullable
+as List<LastExamsModel>?,examsError: freezed == examsError ? _self.examsError : examsError // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -160,10 +159,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( DashboardModel? stats,  String? statsError,  List<ChartsModel>? students,  String? studentsError,  List<ChartsModel>? attendance,  String? attendanceError,  List<ChartsModel>? performance,  String? performanceError,  bool isLoading)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( DashboardModel? stats,  String? statsError,  List<ChartsModel>? students,  String? studentsError,  List<ChartsModel>? attendance,  String? attendanceError,  List<ClassPerformanceModel>? performance,  String? performanceError,  List<LastExamsModel>? exams,  String? examsError)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _HomeState() when $default != null:
-return $default(_that.stats,_that.statsError,_that.students,_that.studentsError,_that.attendance,_that.attendanceError,_that.performance,_that.performanceError,_that.isLoading);case _:
+return $default(_that.stats,_that.statsError,_that.students,_that.studentsError,_that.attendance,_that.attendanceError,_that.performance,_that.performanceError,_that.exams,_that.examsError);case _:
   return orElse();
 
 }
@@ -181,10 +180,10 @@ return $default(_that.stats,_that.statsError,_that.students,_that.studentsError,
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( DashboardModel? stats,  String? statsError,  List<ChartsModel>? students,  String? studentsError,  List<ChartsModel>? attendance,  String? attendanceError,  List<ChartsModel>? performance,  String? performanceError,  bool isLoading)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( DashboardModel? stats,  String? statsError,  List<ChartsModel>? students,  String? studentsError,  List<ChartsModel>? attendance,  String? attendanceError,  List<ClassPerformanceModel>? performance,  String? performanceError,  List<LastExamsModel>? exams,  String? examsError)  $default,) {final _that = this;
 switch (_that) {
 case _HomeState():
-return $default(_that.stats,_that.statsError,_that.students,_that.studentsError,_that.attendance,_that.attendanceError,_that.performance,_that.performanceError,_that.isLoading);case _:
+return $default(_that.stats,_that.statsError,_that.students,_that.studentsError,_that.attendance,_that.attendanceError,_that.performance,_that.performanceError,_that.exams,_that.examsError);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -201,10 +200,10 @@ return $default(_that.stats,_that.statsError,_that.students,_that.studentsError,
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( DashboardModel? stats,  String? statsError,  List<ChartsModel>? students,  String? studentsError,  List<ChartsModel>? attendance,  String? attendanceError,  List<ChartsModel>? performance,  String? performanceError,  bool isLoading)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( DashboardModel? stats,  String? statsError,  List<ChartsModel>? students,  String? studentsError,  List<ChartsModel>? attendance,  String? attendanceError,  List<ClassPerformanceModel>? performance,  String? performanceError,  List<LastExamsModel>? exams,  String? examsError)?  $default,) {final _that = this;
 switch (_that) {
 case _HomeState() when $default != null:
-return $default(_that.stats,_that.statsError,_that.students,_that.studentsError,_that.attendance,_that.attendanceError,_that.performance,_that.performanceError,_that.isLoading);case _:
+return $default(_that.stats,_that.statsError,_that.students,_that.studentsError,_that.attendance,_that.attendanceError,_that.performance,_that.performanceError,_that.exams,_that.examsError);case _:
   return null;
 
 }
@@ -216,7 +215,7 @@ return $default(_that.stats,_that.statsError,_that.students,_that.studentsError,
 
 
 class _HomeState implements HomeState {
-  const _HomeState({this.stats, this.statsError, final  List<ChartsModel>? students, this.studentsError, final  List<ChartsModel>? attendance, this.attendanceError, final  List<ChartsModel>? performance, this.performanceError, this.isLoading = false}): _students = students,_attendance = attendance,_performance = performance;
+  const _HomeState({this.stats, this.statsError, final  List<ChartsModel>? students, this.studentsError, final  List<ChartsModel>? attendance, this.attendanceError, final  List<ClassPerformanceModel>? performance, this.performanceError, final  List<LastExamsModel>? exams, this.examsError}): _students = students,_attendance = attendance,_performance = performance,_exams = exams;
   
 
 @override final  DashboardModel? stats;
@@ -241,8 +240,8 @@ class _HomeState implements HomeState {
 }
 
 @override final  String? attendanceError;
- final  List<ChartsModel>? _performance;
-@override List<ChartsModel>? get performance {
+ final  List<ClassPerformanceModel>? _performance;
+@override List<ClassPerformanceModel>? get performance {
   final value = _performance;
   if (value == null) return null;
   if (_performance is EqualUnmodifiableListView) return _performance;
@@ -251,9 +250,16 @@ class _HomeState implements HomeState {
 }
 
 @override final  String? performanceError;
-// List<ExamModel>? exams,
-// String? examsError,
-@override@JsonKey() final  bool isLoading;
+ final  List<LastExamsModel>? _exams;
+@override List<LastExamsModel>? get exams {
+  final value = _exams;
+  if (value == null) return null;
+  if (_exams is EqualUnmodifiableListView) return _exams;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(value);
+}
+
+@override final  String? examsError;
 
 /// Create a copy of HomeState
 /// with the given fields replaced by the non-null parameter values.
@@ -265,16 +271,16 @@ _$HomeStateCopyWith<_HomeState> get copyWith => __$HomeStateCopyWithImpl<_HomeSt
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomeState&&(identical(other.stats, stats) || other.stats == stats)&&(identical(other.statsError, statsError) || other.statsError == statsError)&&const DeepCollectionEquality().equals(other._students, _students)&&(identical(other.studentsError, studentsError) || other.studentsError == studentsError)&&const DeepCollectionEquality().equals(other._attendance, _attendance)&&(identical(other.attendanceError, attendanceError) || other.attendanceError == attendanceError)&&const DeepCollectionEquality().equals(other._performance, _performance)&&(identical(other.performanceError, performanceError) || other.performanceError == performanceError)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomeState&&(identical(other.stats, stats) || other.stats == stats)&&(identical(other.statsError, statsError) || other.statsError == statsError)&&const DeepCollectionEquality().equals(other._students, _students)&&(identical(other.studentsError, studentsError) || other.studentsError == studentsError)&&const DeepCollectionEquality().equals(other._attendance, _attendance)&&(identical(other.attendanceError, attendanceError) || other.attendanceError == attendanceError)&&const DeepCollectionEquality().equals(other._performance, _performance)&&(identical(other.performanceError, performanceError) || other.performanceError == performanceError)&&const DeepCollectionEquality().equals(other._exams, _exams)&&(identical(other.examsError, examsError) || other.examsError == examsError));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,stats,statsError,const DeepCollectionEquality().hash(_students),studentsError,const DeepCollectionEquality().hash(_attendance),attendanceError,const DeepCollectionEquality().hash(_performance),performanceError,isLoading);
+int get hashCode => Object.hash(runtimeType,stats,statsError,const DeepCollectionEquality().hash(_students),studentsError,const DeepCollectionEquality().hash(_attendance),attendanceError,const DeepCollectionEquality().hash(_performance),performanceError,const DeepCollectionEquality().hash(_exams),examsError);
 
 @override
 String toString() {
-  return 'HomeState(stats: $stats, statsError: $statsError, students: $students, studentsError: $studentsError, attendance: $attendance, attendanceError: $attendanceError, performance: $performance, performanceError: $performanceError, isLoading: $isLoading)';
+  return 'HomeState(stats: $stats, statsError: $statsError, students: $students, studentsError: $studentsError, attendance: $attendance, attendanceError: $attendanceError, performance: $performance, performanceError: $performanceError, exams: $exams, examsError: $examsError)';
 }
 
 
@@ -285,7 +291,7 @@ abstract mixin class _$HomeStateCopyWith<$Res> implements $HomeStateCopyWith<$Re
   factory _$HomeStateCopyWith(_HomeState value, $Res Function(_HomeState) _then) = __$HomeStateCopyWithImpl;
 @override @useResult
 $Res call({
- DashboardModel? stats, String? statsError, List<ChartsModel>? students, String? studentsError, List<ChartsModel>? attendance, String? attendanceError, List<ChartsModel>? performance, String? performanceError, bool isLoading
+ DashboardModel? stats, String? statsError, List<ChartsModel>? students, String? studentsError, List<ChartsModel>? attendance, String? attendanceError, List<ClassPerformanceModel>? performance, String? performanceError, List<LastExamsModel>? exams, String? examsError
 });
 
 
@@ -302,7 +308,7 @@ class __$HomeStateCopyWithImpl<$Res>
 
 /// Create a copy of HomeState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? stats = freezed,Object? statsError = freezed,Object? students = freezed,Object? studentsError = freezed,Object? attendance = freezed,Object? attendanceError = freezed,Object? performance = freezed,Object? performanceError = freezed,Object? isLoading = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? stats = freezed,Object? statsError = freezed,Object? students = freezed,Object? studentsError = freezed,Object? attendance = freezed,Object? attendanceError = freezed,Object? performance = freezed,Object? performanceError = freezed,Object? exams = freezed,Object? examsError = freezed,}) {
   return _then(_HomeState(
 stats: freezed == stats ? _self.stats : stats // ignore: cast_nullable_to_non_nullable
 as DashboardModel?,statsError: freezed == statsError ? _self.statsError : statsError // ignore: cast_nullable_to_non_nullable
@@ -311,9 +317,10 @@ as List<ChartsModel>?,studentsError: freezed == studentsError ? _self.studentsEr
 as String?,attendance: freezed == attendance ? _self._attendance : attendance // ignore: cast_nullable_to_non_nullable
 as List<ChartsModel>?,attendanceError: freezed == attendanceError ? _self.attendanceError : attendanceError // ignore: cast_nullable_to_non_nullable
 as String?,performance: freezed == performance ? _self._performance : performance // ignore: cast_nullable_to_non_nullable
-as List<ChartsModel>?,performanceError: freezed == performanceError ? _self.performanceError : performanceError // ignore: cast_nullable_to_non_nullable
-as String?,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
-as bool,
+as List<ClassPerformanceModel>?,performanceError: freezed == performanceError ? _self.performanceError : performanceError // ignore: cast_nullable_to_non_nullable
+as String?,exams: freezed == exams ? _self._exams : exams // ignore: cast_nullable_to_non_nullable
+as List<LastExamsModel>?,examsError: freezed == examsError ? _self.examsError : examsError // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
