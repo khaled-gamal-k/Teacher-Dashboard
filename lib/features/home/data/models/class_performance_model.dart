@@ -8,7 +8,7 @@ part 'class_performance_model.g.dart';
 class ClassPerformanceModel {
   @JsonKey(name: 'class_name')
   final String className;
-  final List<ChartsModel> points;
+  final List<ChartsModel>? points;
 
   ClassPerformanceModel({required this.className, required this.points});
 

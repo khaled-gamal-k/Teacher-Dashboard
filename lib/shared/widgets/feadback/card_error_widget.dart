@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../feadback/error_widget.dart';
+import 'error_widget.dart';
 
 import '../../../core/extensions/context_extensions.dart';
 

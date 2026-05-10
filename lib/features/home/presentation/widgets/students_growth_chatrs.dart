@@ -6,8 +6,8 @@ import '../../../../core/extensions/strings_extensions.dart';
 import '../../../../core/utils/app_helpers.dart';
 import '../../../../shared/models/charts_model.dart';
 import '../../../../shared/widgets/charts/app_line_chart.dart';
-import '../../../../shared/widgets/charts/charts_error_widget.dart';
-import '../../../../shared/widgets/charts/charts_loading_widget.dart';
+import '../../../../shared/widgets/feadback/card_error_widget.dart';
+import '../../../../shared/widgets/feadback/card_loading_widget.dart';
 import '../cubit/home_cubit.dart';
 import '../cubit/home_state.dart';
 

@@ -7,24 +7,26 @@ import '../../../core/extensions/widgets_extensions.dart';
 import '../../../core/utils/app_text_style.dart';
 
 class ChartsLoadingWidget extends StatelessWidget {
-  const ChartsLoadingWidget({super.key, required this.color});
+  const ChartsLoadingWidget({super.key, required this.color, this.size});
   final Color color;
+  final double? size;
 
   @override
   Widget build(BuildContext context) {
+    final width = context.isDesktop
+        ? context.width * .39
+        : context.isTablet
+        ? context.width * .6
+        : context.width * .9;
     return SizedBox(
-      width: context.isDesktop
-          ? context.width * .39
-          : context.isTablet
-          ? context.width * .6
-          : context.width * .9,
+      width: size ?? width,
       child: AspectRatio(
         aspectRatio: 1.5,
         child: Card(
           key: const ValueKey('loading'),
           child: Center(
             child: Column(
-              mainAxisSize: MainAxisSize.min,
+              mainAxisSize: .min,
               children: [
                 // * Neon loader
                 LoadingAnimationWidget.threeArchedCircle(color: color, size: 100),

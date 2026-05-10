@@ -10,7 +10,7 @@ ClassPerformanceModel _$ClassPerformanceModelFromJson(
   Map<String, dynamic> json,
 ) => ClassPerformanceModel(
   className: json['class_name'] as String,
-  points: (json['points'] as List<dynamic>)
-      .map((e) => ChartsModel.fromJson(e as Map<String, dynamic>))
+  points: (json['points'] as List<dynamic>?)
+      ?.map((e) => ChartsModel.fromJson(e as Map<String, dynamic>))
       .toList(),
 );

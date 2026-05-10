@@ -6,9 +6,9 @@ import 'supabase_errors.dart';
 class SupabaseDatabaseConfig {
   final _supabase = Supabase.instance.client;
 
-  Future<void> addData({required String tableName, required Map<String, dynamic> data}) async {
+  Future<dynamic> addData({required String tableName, required Map<String, dynamic> data}) async {
     try {
-      await _supabase.from(tableName).insert(data);
+      return await _supabase.from(tableName).insert(data).select();
     } catch (e) {
       throw SupaFailure.fromException(e);
     }
@@ -24,7 +24,23 @@ class SupabaseDatabaseConfig {
 
   Future<List<Map<String, dynamic>>> getData({required String tableName}) async {
     try {
-      return await _supabase.from(tableName).select();
+      final res = await _supabase.from(tableName).select();
+      Logger().d(res.runtimeType);
+      Logger().d(res);
+      return res;
+    } catch (e) {
+      throw SupaFailure.fromException(e);
+    }
+  }
+
+  Future<List<Map<String, dynamic>>> getDataByID({
+    required String tableName,
+    required String id,
+  }) async {
+    try {
+      final res = await _supabase.from(tableName).select().eq('id', id);
+
+      return res;
     } catch (e) {
       throw SupaFailure.fromException(e);
     }
@@ -43,7 +59,18 @@ class SupabaseDatabaseConfig {
       final res = await _supabase.rpc(tableName);
       Logger().d(res.runtimeType);
       Logger().d(res);
-      return res ;
+      return res;
+    } catch (e) {
+      throw SupaFailure.fromException(e);
+    }
+  }
+
+  Future fetchRPCWithParams(String tableName, {required Map<String, dynamic> params}) async {
+    try {
+      final res = await _supabase.rpc(tableName, params: params);
+      Logger().d(res.runtimeType);
+      Logger().d(res);
+      return res;
     } catch (e) {
       throw SupaFailure.fromException(e);
     }

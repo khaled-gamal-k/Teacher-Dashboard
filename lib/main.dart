@@ -11,12 +11,12 @@ import 'core/services/get_it_service.dart';
 import 'core/services/prefs_service.dart';
 import 'core/theme/app_theme.dart';
 import 'generated/l10n.dart';
-import 'shared/widgets/app_cubit_obs.dart';
+import 'shared/widgets/feadback/app_cubit_obs.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: '.env');
   Bloc.observer = AppCubitObs();
+  await dotenv.load(fileName: '.env');
   await ScreenUtil.ensureScreenSize();
   await PrefsService.init();
   await GetItService.init();

@@ -5,6 +5,7 @@ import 'responsive/desktop_layout.dart';
 import 'responsive/mobile_layout.dart';
 import 'responsive/tablet_layout.dart';
 import 'sidebar/app_sidebar.dart';
+import 'topbar/app_topbar.dart';
 
 class AppLayouts extends StatelessWidget {
   const AppLayouts({super.key, required this.child});
@@ -14,13 +15,21 @@ class AppLayouts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (context.isDesktop) {
-      return DesktopLayout(body: child, sidebar: const AppSidebar());
+      return DesktopLayout(body: child, sidebar: const AppSidebar(), topBar: const AppTopbar());
     }
 
     if (context.isTablet) {
-      return TabletLayout(body: child, sidebar: const AppSidebar(isCompact: true,));
+      return TabletLayout(
+        body: child,
+        sidebar: const AppSidebar(isCompact: true),
+        topBar: const AppTopbar(),
+      );
     }
 
-    return MobileLayout(body: child, sidebar: const AppSidebar());
+    return MobileLayout(
+      body: child,
+      sidebar: const AppSidebar(),
+      topBar: const AppTopbar(isCompact: true),
+    );
   }
 }

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/extensions/widgets_extensions.dart';
-import '../../../../core/network/supabase_database_config.dart';
+import '../../../../shared/widgets/page_header_widget.dart';
 import '../widgets/attendance_per_month_chatrs.dart';
 import '../widgets/class_performance_charts.dart';
-import '../widgets/last_exams_table.dart';
+import '../widgets/last_exams_bloc.dart';
 import '../widgets/stats_section.dart';
 import '../widgets/students_growth_chatrs.dart';
 
@@ -13,13 +13,16 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SupabaseDatabaseConfig().fetchRPC('dashboard');
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: .center,
         children: [
+          const PageHeaderWidget(
+            title: 'الرئيسية',
+            subtitle: 'نظرة عامة على نظام إدارة الدروس الخصوصية',
+          ),
           const StatsSection(),
-          20.height,
+          30.height,
           const Wrap(
             spacing: 20,
             runSpacing: 20,
@@ -27,7 +30,7 @@ class HomeView extends StatelessWidget {
             children: [
               StudentsGrowthChatrs(),
               AttendancePerMonthChatrs(),
-              LastExamsTable(),
+              LastExamsBloc(),
               ClassPerformanceCharts(),
             ],
           ),

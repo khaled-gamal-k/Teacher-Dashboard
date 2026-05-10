@@ -49,8 +49,9 @@ class AppBarChart extends StatelessWidget {
                         sideTitles: SideTitles(
                           getTitlesWidget: (value, meta) {
                             final style = AppTextStyles.body13Bold;
-                            if (value.toInt() >= classesPerformance!.length) {
-                              return const SizedBox();
+                            if (classesPerformance == null ||
+                                value.toInt() >= classesPerformance!.length) {
+                              return const SizedBox.shrink();
                             }
                             final lable =
                                 classesPerformance?[value.toInt()].className ??
@@ -79,10 +80,15 @@ class AppBarChart extends StatelessWidget {
                     barTouchData: BarTouchData(
                       touchTooltipData: BarTouchTooltipData(
                         getTooltipItem: (group, groupIndex, rod, rodIndex) {
-                          final point = classesPerformance![groupIndex].points[rodIndex];
+                          final points = classesPerformance?[groupIndex].points;
 
+                          if (points == null || rodIndex >= points.length) {
+                            return null;
+                          }
+
+                          final point = points[rodIndex];
                           return BarTooltipItem(
-                            'الساعه ${point.x}:00\n${point.y}%',
+                            'الساعه ${point.x ?? 0}:00\n${point.y ?? 0}%',
                             const TextStyle(color: Colors.white),
                           );
                         },
@@ -108,22 +114,24 @@ class AppBarChart extends StatelessWidget {
 
       return BarChartGroupData(
         x: index,
-        barsSpace: 5,
-        barRods: classItem.points.map((point) {
-          return BarChartRodData(
-            toY: point.y,
-            width: 10,
-            color: barColor,
-            gradient: gradientColors != null
-                ? LinearGradient(
-                    colors: _buildGradientColors(point.x.toInt()),
-                    begin: .bottomCenter,
-                    end: .topCenter,
-                  )
-                : null,
-            borderRadius: const .only(topLeft: .circular(6), topRight: .circular(6)),
-          );
-        }).toList(),
+        barsSpace: 6,
+        barRods:
+            classItem.points?.map((point) {
+              return BarChartRodData(
+                toY: point.y ?? 0,
+                width: 10,
+                color: barColor,
+                gradient: gradientColors != null
+                    ? LinearGradient(
+                        colors: _buildGradientColors((point.x ?? 0).toInt()),
+                        begin: .bottomCenter,
+                        end: .topCenter,
+                      )
+                    : null,
+                borderRadius: const .only(topLeft: .circular(6), topRight: .circular(6)),
+              );
+            }).toList() ??
+            [],
       );
     });
   }

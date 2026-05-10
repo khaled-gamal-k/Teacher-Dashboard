@@ -1,12 +1,10 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'charts_model.dart';
+part of 'classes_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-ChartsModel _$ChartsModelFromJson(Map<String, dynamic> json) => ChartsModel(
-  x: (json['x'] as num?)?.toDouble(),
-  y: (json['y'] as num?)?.toDouble(),
-);
+ClassesModel _$ClassesModelFromJson(Map<String, dynamic> json) =>
+    ClassesModel(id: json['id'] as String?, name: json['name'] as String?);

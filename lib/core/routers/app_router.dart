@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../features/home/presentation/cubit/home_cubit.dart';
 import '../../features/home/presentation/views/home_view.dart';
+import '../../features/students/presentation/cubit/students_cubit.dart';
 import '../../features/students/presentation/views/students_view.dart';
 import '../../layout/app_layouts.dart';
 import '../services/get_it_service.dart';
@@ -48,7 +49,13 @@ class AppRouter {
               child: const HomeView(),
             ),
           ),
-          GoRoute(path: Routers.students, builder: (_, _) => const StudentsView()),
+          GoRoute(
+            path: Routers.students,
+            builder: (_, _) => BlocProvider(
+              create: (context) => getIt<StudentsCubit>()..init(),
+              child: const StudentsView(),
+            ),
+          ),
         ],
       ),
     ],

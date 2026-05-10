@@ -75,7 +75,7 @@ class AppLineChart extends StatelessWidget {
                     ),
                     lineBarsData: [
                       LineChartBarData(
-                        spots: data!.map((e) => FlSpot(e.x, e.y)).toList(),
+                        spots: data!.map((e) => FlSpot(e.x ?? 0, e.y ?? 0)).toList(),
                         isCurved: true,
                         isStrokeCapRound: true,
                         belowBarData: BarAreaData(
