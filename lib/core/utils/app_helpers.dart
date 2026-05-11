@@ -1,6 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 
 import '../../shared/models/sidebar_item_model.dart';
 import '../routers/routers_constants.dart';
@@ -35,20 +36,19 @@ class AppHelpers {
       child: Text(months[value.toInt()], style: style),
     );
   }
-  // static Widget bottomClassesWidget(double value, TitleMeta meta) {
-  //   final style = AppTextStyles.body13Bold;
 
-  //   const months = [
-  //     '',
-  //     '1',
-  //     '2',
-  //     '3',
-  //   ];
-  //   return SideTitleWidget(
-  //     meta: meta,
-  //     child: Text(months[value.toInt()], style: style),
-  //   );
-  // }
+  static String formatTimeFrom24To12(String time) {
+    DateTime? parsedTime;
+
+    try {
+      parsedTime = DateFormat.Hm('en').parse(time);
+    } catch (_) {
+      parsedTime = null;
+    }
+
+    final formattedTime = parsedTime != null ? DateFormat.jm('ar').format(parsedTime) : '-';
+    return formattedTime;
+  }
 
   static final sideBarItems = [
     Item(FontAwesomeIcons.chartPie, 'الرئيسية', Routers.home),

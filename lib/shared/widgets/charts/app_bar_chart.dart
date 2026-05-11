@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import '../../../core/utils/app_helpers.dart';
 import '../../../features/home/data/models/class_performance_model.dart';
 import '../../../core/utils/app_text_style.dart';
 
@@ -87,8 +88,11 @@ class AppBarChart extends StatelessWidget {
                           }
 
                           final point = points[rodIndex];
+                          final formattedTime = AppHelpers.formatTimeFrom24To12(
+                            '${point.x ?? 00}:00',
+                          );
                           return BarTooltipItem(
-                            'الساعه ${point.x ?? 0}:00\n${point.y ?? 0}%',
+                            'الساعه $formattedTime\n${point.y ?? 0}%',
                             const TextStyle(color: Colors.white),
                           );
                         },

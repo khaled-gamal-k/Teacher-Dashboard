@@ -1,6 +1,7 @@
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:teacher_dashboard/core/utils/app_helpers.dart';
 import 'package:teacher_dashboard/features/home/data/models/last_exams_model.dart';
 
 import '../../../../core/constants/app_colors.dart';
@@ -64,7 +65,7 @@ class LastExamsTable extends StatelessWidget {
                   final formattedDate = DateFormat.yMMMMd(
                     'ar',
                   ).format(DateTime.parse(exam.examDate ?? ''));
-                  final formattedTime = _formatTime(exam.classTime ?? '');
+                  final formattedTime = AppHelpers.formatTimeFrom24To12(exam.classTime ?? '');
 
                   return DataRow(
                     color: .resolveWith<Color?>((states) {
@@ -116,18 +117,5 @@ class LastExamsTable extends StatelessWidget {
     }
 
     return AppTextStyles.body14Bold.copyWith(color: color);
-  }
-
-  String _formatTime(String time) {
-    DateTime? parsedTime;
-
-    try {
-      parsedTime = DateFormat.Hm('en').parse(time);
-    } catch (_) {
-      parsedTime = null;
-    }
-
-    final formattedTime = parsedTime != null ? DateFormat.jm('ar').format(parsedTime) : '-';
-    return formattedTime;
   }
 }
